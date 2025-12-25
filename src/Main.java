@@ -1,13 +1,34 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-void main() {
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    IO.println(String.format("Hello and welcome!"));
+public class Main {
+    public static void main(String[] args) {
+        System.out.println(" GROCERY STORE MANAGMENT SYSTEM ");
 
-    for (int i = 1; i <= 5; i++) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        IO.println("i = " + i);
+        Product apple = new Product(" Яблоко ",120.0, 50, " Фрукты ");
+        Product milk = new Product(" Молоко ", 450.0, 0, " Молочные ");
+        Customer user1 = new Customer(" Нурали Амангелди ", 60000.0, 100);
+        Sale sale1 = new Sale(1001, " Яблоко: ", 1200.0);
+
+        System.out.println(" STORAGE ");
+        System.out.println(apple);
+        System.out.println(milk);
+
+        System.out.println(" ПРОВЕРКА цены яблока: " + apple.getPrice() + " тг");
+
+        System.out.println(" TEST:Пополнение ");
+        System.out.println(" Есть ли молоко? "+ milk.isInStock());
+        milk.restock(15);
+        System.out.println(" Теперь есть молоко? " + milk.isInStock());
+
+        System.out.println( "TEST:клиенты" );
+        System.out.println(user1);
+        user1.addPoints(50);
+        System.out.println( " Обновленный клиент: "+ user1);
+
+        System.out.println(" Test: Продажа ");
+        System.out.println(sale1);
+        sale1.applyDiscount(10);
+        sale1.completeSale();
+        System.out.println(" Итоги продажи: " + sale1);
+
+
     }
 }
