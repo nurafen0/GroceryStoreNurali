@@ -23,7 +23,7 @@ public class Main {
         user1.addPoints(50);
         System.out.println( " Обновленный клиент: "+ user1);
 
-        System.out.println(" Test: Продажа ");
+        System.out.println(" Test:  Продажа ");
         System.out.println(sale1);
         sale1.applyDiscount(10);
         sale1.completeSale();
