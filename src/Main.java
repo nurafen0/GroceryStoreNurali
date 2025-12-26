@@ -11,7 +11,7 @@ public class Main {
         System.out.println(apple);
         System.out.println(milk);
 
-        System.out.println(" ПРОВЕРКА цены яблока: " + apple.getPrice() + " тг");
+        System.out.println(" Проверка цены яблока: " + apple.getPrice() + " тг");
 
         System.out.println(" TEST:Пополнение ");
         System.out.println(" Есть ли молоко? "+ milk.isInStock());

@@ -12,7 +12,7 @@ public class Product {
     }
 
     public Product() {
-        this.name = " Unknown ";
+        this.name = " Unknowт ";
         this.price = 0;
         this.quantity = 0;
         this.category = " general ";
