@@ -11,6 +11,19 @@ public class Customer {
         }
         public String getFulName() {return fullName;}
     public int getLoyaltyPoints() {return loyaltyPoints;}
+    public String getFullName() { return fullName; }
+    public double getTotalSpent() { return totalSpent; }
+    public int getLoyaltyPoints() { return loyaltyPoints; }
+    public boolean isVip() { return isVip; }
+    public void setFullName(String fullName) { this.fullName = fullName; }
+    public void setTotalSpent(double totalSpent) {
+        this.totalSpent = totalSpent;
+        checkVipStatus();}
+
+    public void setLoyaltyPoints(int loyaltyPoints) {
+        this.loyaltyPoints = loyaltyPoints;
+    }
+
 
     public void addPoints(int points) {
             this.loyaltyPoints += points;

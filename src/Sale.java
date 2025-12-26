@@ -11,6 +11,17 @@ public class Sale {
         this.status =" Ожидание ";
     }
 
+    public int getSaleId() { return saleId; }
+    public String getProductName() { return productName; }
+    public double getAmount() { return amount; }
+    public String getStatus() { return status; }
+
+
+    public void setSaleId(int saleId) { this.saleId = saleId; }
+    public void setProductName(String productName) { this.productName = productName; }
+    public void setAmount(double amount) { this.amount = amount; }
+
+
 
     public void applyDiscount(double percent) {
         this.amount -= this.amount * (percent / 100);

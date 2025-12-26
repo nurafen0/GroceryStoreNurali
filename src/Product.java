@@ -21,6 +21,10 @@ public class Product {
     public String getName() {return name;}
     public double getPrice() {return price;}
     public int getQuantity() {return quantity;}
+    public String getCategory() {return category;}
+    public void setName(String name) {this.name = name;}
+    public void setCategory(String category) {this.category = category;}
+
 
 
     public void setPrice(double price) {this.price = price;}
