@@ -25,6 +25,6 @@ public class Customer {
     }
 
     public String toString() {
-            return "Клиент: " + fullName + "баллы: " +loyaltyPoints +"ВИП: " +isVip;
+            return " Клиент: " + fullName + " баллы: " +loyaltyPoints +" ВИП: " +isVip;
     }
 }
