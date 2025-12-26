@@ -9,11 +9,15 @@ public class Customer {
             this.loyaltyPoints = loyaltyPoints;
             this.isVip = totalSpent >50000;
         }
-        public String getFulName() {return fullName;}
+    public Customer() {
+        this.fullName = "Unknown";
+        this.totalSpent = 0;
+        this.loyaltyPoints = 0;
+        this.isVip = false;
+    }
     public int getLoyaltyPoints() {return loyaltyPoints;}
     public String getFullName() { return fullName; }
     public double getTotalSpent() { return totalSpent; }
-    public int getLoyaltyPoints() { return loyaltyPoints; }
     public boolean isVip() { return isVip; }
     public void setFullName(String fullName) { this.fullName = fullName; }
     public void setTotalSpent(double totalSpent) {

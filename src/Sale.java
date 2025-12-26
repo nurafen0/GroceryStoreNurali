@@ -10,6 +10,12 @@ public class Sale {
         this.amount = amount;
         this.status =" Ожидание ";
     }
+    public Sale() {
+        this.saleId = 0;
+        this.productName = "Unknown";
+        this.amount = 0;
+        this.status = "Ожидание";
+    }
 
     public int getSaleId() { return saleId; }
     public String getProductName() { return productName; }
