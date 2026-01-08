@@ -10,4 +10,22 @@ public class PackagedProduct extends Product {
     public void performAction() {
         System.out.println("Scanning barcode [" + barcode + "] for packaged item: " + name);
     }
+
+    @Override
+    public String getCategory() {
+        return "Packaged " + category;
+    }
+
+    public String getBarcode() {
+        return barcode;
+    }
+
+    public void verifySeal() {
+        System.out.println("Safety seal for " + name + " is intact.");
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + " [Barcode: " + barcode + "]";
+    }
 }

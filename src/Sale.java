@@ -8,8 +8,9 @@ public class Sale {
         this.saleId = saleId;
         this.productName = productName;
         this.amount = amount;
-        this.status =" Ожидание ";
+        this.status = " Ожидание ";
     }
+
     public Sale() {
         this.saleId = 0;
         this.productName = "Unknown";
@@ -22,22 +23,20 @@ public class Sale {
     public double getAmount() { return amount; }
     public String getStatus() { return status; }
 
-
     public void setSaleId(int saleId) { this.saleId = saleId; }
     public void setProductName(String productName) { this.productName = productName; }
     public void setAmount(double amount) { this.amount = amount; }
 
-
-
     public void applyDiscount(double percent) {
         this.amount -= this.amount * (percent / 100);
-        System.out.println(" Скидка "+ percent + " к чеку под номером "+ saleId);
+        System.out.println(" Скидка " + percent + " к чеку под номером " + saleId);
     }
 
-    public void completeSale(){
+    public void completeSale() {
         this.status = " Оплачено ";
     }
 
+    @Override
     public String toString() {
         return " Чек номер- " + saleId + " товар " + productName + " Итого: " + amount + " Статус: " + status;
     }

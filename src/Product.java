@@ -1,4 +1,4 @@
-public class Product {
+class Product {
     protected String name;
     protected double price;
     protected int quantity;
@@ -18,15 +18,17 @@ public class Product {
         this.category = "General";
     }
 
-    // This method will be overridden by children
     public void performAction() {
         System.out.println("Processing general product: " + name);
+    }
+
+    public String getCategory() {
+        return category;
     }
 
     public String getName() { return name; }
     public double getPrice() { return price; }
     public int getQuantity() { return quantity; }
-    public String getCategory() { return category; }
 
     public void restock(int amount) {
         this.quantity += amount;
