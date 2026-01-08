@@ -12,14 +12,14 @@ public class Main {
         inventory.add(new FreshProduct("Apple", 120.0, 50, "Fruits", "2026-01-20"));
         inventory.add(new PackagedProduct("Milk", 450.0, 15, "Dairy", "789456123"));
 
-        System.out.println("\n--- POLYMORPHISM DEMO ---");
+        System.out.println("\n POLYMORPHISM  ");
         for (Product p : inventory) {
             p.performAction(); // Polymorphic call
             if (p instanceof FreshProduct) {
                 ((FreshProduct) p).checkQuality(); // Downcasting
             }
         }
-        System.out.println("--------------------------\n");
+
 
 
         // --- YOUR ORIGINAL TEST CODE (UNCHANGED) ---
