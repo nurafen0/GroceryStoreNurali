@@ -1,4 +1,5 @@
-class Product {
+public class Product {
+    // Required: Minimum 4 protected fields
     protected String name;
     protected double price;
     protected int quantity;
@@ -18,17 +19,15 @@ class Product {
         this.category = "General";
     }
 
+    // Required: Method to be overridden
     public void performAction() {
-        System.out.println("Processing general product: " + name);
-    }
-
-    public String getCategory() {
-        return category;
+        System.out.println("Processing product: " + name);
     }
 
     public String getName() { return name; }
     public double getPrice() { return price; }
     public int getQuantity() { return quantity; }
+    public String getCategory() { return category; }
 
     public void restock(int amount) {
         this.quantity += amount;

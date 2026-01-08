@@ -1,16 +1,20 @@
 public class Sale {
+    // Category 1: Encapsulation - private fields
     private int saleId;
     private String productName;
     private double amount;
     private String status;
 
+    // Constructor
     public Sale(int saleId, String productName, double amount) {
         this.saleId = saleId;
         this.productName = productName;
-        this.amount = amount;
-        this.status = " Ожидание ";
+        // Using setter for validation during initialization
+        setAmount(amount);
+        this.status = "Ожидание";
     }
 
+    // Default Constructor
     public Sale() {
         this.saleId = 0;
         this.productName = "Unknown";
@@ -18,22 +22,32 @@ public class Sale {
         this.status = "Ожидание";
     }
 
+    // Getters
     public int getSaleId() { return saleId; }
     public String getProductName() { return productName; }
     public double getAmount() { return amount; }
     public String getStatus() { return status; }
 
-    public void setSaleId(int saleId) { this.saleId = saleId; }
-    public void setProductName(String productName) { this.productName = productName; }
-    public void setAmount(double amount) { this.amount = amount; }
+    // Setters with Validation (Defense Category 1)
+    public void setAmount(double amount) {
+        if (amount >= 0) {
+            this.amount = amount;
+        } else {
+            System.out.println("Error: Amount cannot be negative!");
+            this.amount = 0;
+        }
+    }
 
+    // Business Logic Methods
     public void applyDiscount(double percent) {
-        this.amount -= this.amount * (percent / 100);
-        System.out.println(" Скидка " + percent + " к чеку под номером " + saleId);
+        if (percent > 0 && percent <= 100) {
+            this.amount -= this.amount * (percent / 100);
+            System.out.println(" Скидка " + percent + "% к чеку под номером " + saleId);
+        }
     }
 
     public void completeSale() {
-        this.status = " Оплачено ";
+        this.status = "Оплачено";
     }
 
     @Override

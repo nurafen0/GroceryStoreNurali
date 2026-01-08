@@ -4,51 +4,22 @@ public class Customer {
     private int loyaltyPoints;
     private boolean isVip;
 
-    public Customer(String fulName, double totalSpent, int loyaltyPoints) {
-        this.fullName = fulName;
+    public Customer(String fullName, double totalSpent, int loyaltyPoints) {
+        this.fullName = fullName;
         this.totalSpent = totalSpent;
         this.loyaltyPoints = loyaltyPoints;
         this.isVip = totalSpent > 50000;
     }
 
-    public Customer() {
-        this.fullName = "Unknown";
-        this.totalSpent = 0;
-        this.loyaltyPoints = 0;
-        this.isVip = false;
-    }
-
-    public int getLoyaltyPoints() { return loyaltyPoints; }
-    public String getFullName() { return fullName; }
-    public double getTotalSpent() { return totalSpent; }
-    public boolean isVip() { return isVip; }
-
-    public void setFullName(String fullName) { this.fullName = fullName; }
-
-    public void setTotalSpent(double totalSpent) {
-        this.totalSpent = totalSpent;
-        checkVipStatus();
-    }
-
-    public void setLoyaltyPoints(int loyaltyPoints) {
-        this.loyaltyPoints = loyaltyPoints;
-    }
+    // Add your getters and setters here...
 
     public void addPoints(int points) {
         this.loyaltyPoints += points;
-        System.out.println(" Начислено " + points + " баллов клиенту " + fullName);
-    }
-
-    public boolean checkVipStatus() {
-        if (this.totalSpent > 100000) {
-            this.isVip = true;
-            return true;
-        }
-        return this.isVip;
+        System.out.println("Начислено " + points + " баллов клиенту " + fullName);
     }
 
     @Override
     public String toString() {
-        return " Клиент: " + fullName + " баллы: " + loyaltyPoints + " ВИП: " + isVip;
+        return "Клиент: " + fullName + " баллы: " + loyaltyPoints + " ВИП: " + isVip;
     }
 }
