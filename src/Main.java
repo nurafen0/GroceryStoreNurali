@@ -1,60 +1,102 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         ArrayList<Product> inventory = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+        int choice;
 
-        inventory.add(new PackagedProduct("Banana", 12.50, 50, "Fruit", "BAR-99821"));
-        inventory.add(new FreshProduct("Chicken", 25.00, 10, "meat", "2026-01-15"));
-        inventory.add(new PackagedProduct("Coca-cola", 1.20, 100, "Soda drink", "BAR-00123"));
+        do {
+            System.out.println("--- GROCERY STORE MANAGEMENT ---");
+            System.out.println("1. Add General Product");
+            System.out.println("2. Add Packaged Product");
+            System.out.println("3. Add Fresh Product");
+            System.out.println("4. View All Inventory");
+            System.out.println("5. Process Products (Polymorphism)");
+            System.out.println("6. View Fresh Products (instanceof)");
+            System.out.println("0. Exit");
+            System.out.print("Choice: ");
+            choice = scanner.nextInt();
+            scanner.nextLine();
 
-        System.out.println("=== GROCERY STORE MANAGEMENT SYSTEM (WEEK 4) ===");
-        System.out.println("Demonstrating Polymorphism & Downcasting:\n");
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter Name: ");
+                    String n1 = scanner.nextLine();
+                    System.out.print("Enter Price: ");
+                    double p1 = scanner.nextDouble();
+                    System.out.print("Enter Quantity: ");
+                    int q1 = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.print("Enter Category: ");
+                    String c1 = scanner.nextLine();
 
-        for (Product p : inventory) {
-            p.performAction();
+                    inventory.add(new Product(n1, p1, q1, c1));
+                    System.out.println("Added successfully!");
+                    break;
 
-            System.out.println("Details: " + p.toString());
+                case 2:
+                    System.out.print("Enter Name: ");
+                    String n2 = scanner.nextLine();
+                    System.out.print("Enter Price: ");
+                    double p2 = scanner.nextDouble();
+                    System.out.print("Enter Quantity: ");
+                    int q2 = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.print("Enter Category: ");
+                    String c2 = scanner.nextLine();
+                    System.out.print("Enter Barcode: ");
+                    String b2 = scanner.nextLine();
 
-            if (p instanceof PackagedProduct) {
-                PackagedProduct pp = (PackagedProduct) p;
-                pp.printLabel();
+                    inventory.add(new PackagedProduct(n2, p2, q2, c2, b2));
+                    System.out.println("Packaged Product added!");
+                    break;
+
+                case 3:
+                    System.out.print("Enter Name: ");
+                    String n3 = scanner.nextLine();
+                    System.out.print("Enter Price: ");
+                    double p3 = scanner.nextDouble();
+                    System.out.print("Enter Quantity: ");
+                    int q3 = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.print("Enter Category: ");
+                    String c3 = scanner.nextLine();
+                    System.out.print("Enter Expiry Date: ");
+                    String e3 = scanner.nextLine();
+
+                    inventory.add(new FreshProduct(n3, p3, q3, c3, e3));
+                    System.out.println("Fresh Product added!");
+                    break;
+
+                case 4:
+                    if (inventory.isEmpty()) {
+                        System.out.println("Inventory is empty!");
+                    } else {
+                        for (Product p : inventory) {
+                            System.out.println(p.toString());
+                        }
+                    }
+                    break;
+
+                case 5:
+                    for (Product p : inventory) {
+                        p.performAction();
+                    }
+                    break;
+
+                case 6:
+                    for (Product p : inventory) {
+                        if (p instanceof FreshProduct) {
+                            System.out.println(p.toString());
+                            ((FreshProduct) p).checkQuality();
+                        }
+                    }
+                    break;
             }
-            else if (p instanceof FreshProduct) {
-                FreshProduct fp = (FreshProduct) p;
-                fp.checkQuality();
-            }
-            System.out.println("-----------------------------------\n");
-        }
-
-        System.out.println("=== ORIGINAL SYSTEM TESTS ===");
-
-        Product apple = new Product(" Яблоко ", 120.0, 50, " Фрукты ");
-        Product milk = new Product(" Молоко ", 450.0, 0, " Молочные ");
-
-        Customer user1 = new Customer(" Нурали Амангелди ", 60000.0, 100);
-        Sale sale1 = new Sale(1001, " Яблоко: ", 1200.0);
-
-        System.out.println(" STORAGE ");
-        System.out.println(apple);
-        System.out.println(milk);
-
-        System.out.println(" Проверка цены яблока: " + apple.getPrice() + " тг");
-
-        System.out.println(" TEST: Пополнение ");
-        System.out.println(" Есть ли молоко? " + milk.isInStock());
-        milk.restock(15);
-        System.out.println(" Теперь есть молоко? " + milk.isInStock());
-
-        System.out.println(" TEST: Клиенты ");
-        System.out.println(user1);
-        user1.addPoints(50);
-        System.out.println(" Обновленный клиент: " + user1);
-
-        System.out.println(" TEST: Продажа ");
-        System.out.println(sale1);
-        sale1.applyDiscount(10);
-        sale1.completeSale();
-        System.out.println(" Итоги продажи: " + sale1);
+            System.out.println();
+        } while (choice != 0);
+        scanner.close();
     }
 }
