@@ -40,7 +40,7 @@ public class StoreMenu implements Menu {
                     default -> System.out.println("Invalid choice!");
                 }
             } catch (Exception e) {
-                System.out.println("❌ Error: " + e.getMessage());
+                System.out.println(" Error: " + e.getMessage());
             }
         }
     }
@@ -55,7 +55,7 @@ public class StoreMenu implements Menu {
             String date = scanner.nextLine();
 
             inventory.add(new FreshProduct(name, price, 10, date));
-            System.out.println("✅ Product added!");
+            System.out.println(" Product added!");
         } catch (NumberFormatException e) {
             throw new InvalidInputException("Price must be a number!");
         }

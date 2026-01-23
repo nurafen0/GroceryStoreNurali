@@ -5,6 +5,7 @@ public class PackagedProduct extends Product {
 
     public PackagedProduct(String name, double price, int quantity, String barcode) {
         super(name, price, quantity);
+
         setBarcode(barcode);
     }
 
