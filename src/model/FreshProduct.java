@@ -36,7 +36,7 @@ public class FreshProduct extends Product implements Discountable {
     public void setExpiryDate(String expiryDate) {
 
         if (expiryDate == null || expiryDate.trim().isEmpty()) {
-            throw new IllegalArgumentException("Expiry Date cannot be empty");
+            throw new IllegalArgumentException("Expiry Date cannot be empty!");
         }
 
         this.expiryDate = expiryDate;
