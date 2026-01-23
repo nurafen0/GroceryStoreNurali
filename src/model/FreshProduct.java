@@ -45,3 +45,4 @@ public class FreshProduct extends Product implements Discountable {
     public String getExpiryDate() {
         return expiryDate;
     }
+}
