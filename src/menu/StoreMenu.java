@@ -90,12 +90,10 @@ public class StoreMenu implements Menu {
                 break;
             }
         }
-        if (!found) System.out.println("Product not found.");
+        if (found) System.out.println("Product not found.");
     }
 
-    // --- EXISTING METHODS ---
-
-    private void addFreshProduct() throws InvalidInputException {
+private void addFreshProduct() throws InvalidInputException {
         try {
             System.out.print("Name: ");
             String name = scanner.nextLine();
