@@ -1,59 +1,89 @@
-package database;
+    package database;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+    import java.sql.*;
 
-public class ProductDAO {
+    public class ProductDAO {
 
-    public void insertProduct(String name, double price, String category) {
-        String sql = "INSERT INTO product (name, price, category) VALUES (?, ?, ?)";
-        Connection connection = DatabaseConnection.getConnection();
+        public void create(String name, double price, int qty, String category) {
+            String sql = "INSERT INTO products (name, price, quantity, category) VALUES (?, ?, ?, ?);";
+            try (Connection conn = DatabaseConnection.getConnection();
+                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-        try {
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, name);
-            statement.setDouble(2, price);
-            statement.setString(3, category);
+                pstmt.setString(1, name);
+                pstmt.setDouble(2, price);
+                pstmt.setInt(3, qty);
+                pstmt.setString(4, category);
 
-            int rowsInserted = statement.executeUpdate();
-            if (rowsInserted > 0) {
-                System.out.println("Product inserted successfully!");
+                pstmt.executeUpdate();
+                System.out.println(">> Product saved to database.");
+            } catch (SQLException e) {
+                System.out.println(">> Database Error (Create): " + e.getMessage());
             }
-            statement.close();
-        } catch (SQLException e) {
-            System.out.println("Insert failed!");
-            e.printStackTrace();
-        } finally {
-            DatabaseConnection.closeConnection(connection);
+        }
+
+        public void readAll() {
+            String sql = "SELECT * FROM products";
+            try (Connection conn = DatabaseConnection.getConnection();
+                 Statement stmt = conn.createStatement();
+                 ResultSet rs = stmt.executeQuery(sql)) {
+
+                System.out.println("\n--- INVENTORY LIST ---");
+                boolean hasData = false;
+                while (rs.next()) {
+                    hasData = true;
+                    System.out.println("ID: " + rs.getInt("product_id") +
+                            " | Name: " + rs.getString("name") +
+                            " | Category: " + rs.getString("category") +
+                            " | Price: $" + rs.getDouble("price") +
+                            " | Qty: " + rs.getInt("quantity"));
+                }
+                if (!hasData) {
+                    System.out.println("(Table is empty)");
+                }
+            } catch (SQLException e) {
+                System.out.println(">> Read Error: " + e.getMessage());
+            }
+        }
+
+        public void update(int id, double newPrice, int newQty) {
+            String sql = "UPDATE products SET price = ?, quantity = ? WHERE product_id = ?;";
+            try (Connection conn = DatabaseConnection.getConnection();
+                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setDouble(1, newPrice);
+                pstmt.setInt(2, newQty);
+                pstmt.setInt(3, id);
+                int rows = pstmt.executeUpdate();
+                if (rows > 0) System.out.println(">> Update successful.");
+                else System.out.println(">> ID not found.");
+            } catch (SQLException e) {
+                System.out.println(">> Update Error: " + e.getMessage());
+            }
+        }
+
+        public void delete(int id) {
+            String sql = "DELETE FROM products WHERE product_id = ?;";
+            try (Connection conn = DatabaseConnection.getConnection();
+                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setInt(1, id);
+                int rows = pstmt.executeUpdate();
+                if (rows > 0) System.out.println(">> Product deleted.");
+                else System.out.println(">> ID not found.");
+            } catch (SQLException e) {
+                System.out.println(">> Delete Error: " + e.getMessage());
+            }
+        }
+
+        public void searchByName(String name) {
+            String sql = "SELECT * FROM products WHERE name ILIKE ?;";
+            try (Connection conn = DatabaseConnection.getConnection();
+                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setString(1, "%" + name + "%");
+                ResultSet rs = pstmt.executeQuery();
+                while (rs.next()) {
+                    System.out.println("Match found: " + rs.getString("name") + " (Cat: " + rs.getString("category") + ")");
+                }
+            } catch (SQLException e) {
+                System.out.println(">> Search Error: " + e.getMessage());
+            }
         }
     }
-
-    public void getAllProducts() {
-        String sql = "SELECT * FROM product";
-        Connection connection = DatabaseConnection.getConnection();
-
-        try {
-            PreparedStatement statement = connection.prepareStatement(sql);
-            ResultSet resultSet = statement.executeQuery();
-
-            System.out.println("\n--- ALL PRODUCTS FROM DATABASE ---");
-            while (resultSet.next()) {
-                int id = resultSet.getInt("product_id");
-                String name = resultSet.getString("name");
-                double price = resultSet.getDouble("price");
-                String category = resultSet.getString("category");
-
-                System.out.println("ID: " + id + " | Name: " + name + " | Price: " + price + " | Category: " + category);
-            }
-            resultSet.close();
-            statement.close();
-        } catch (SQLException e) {
-            System.out.println("Select failed!");
-            e.printStackTrace();
-        } finally {
-            DatabaseConnection.closeConnection(connection);
-        }
-    }
-}
